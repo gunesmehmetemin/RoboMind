@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Bağlantı Şeması</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .diagram {
+            background: #ffffff;
+            border: 2px solid #333;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .arduino {
+            background: #4a90e2;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px;
+            position: relative;
+            width: 200px;
+            height: 120px;
+            display: inline-block;
+        }
+        .lcd {
+            background: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px;
+            width: 150px;
+            height: 80px;
+            display: inline-block;
+        }
+        .button-circuit {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px;
+            width: 120px;
+            height: 60px;
+            display: inline-block;
+        }
+        .resistor {
+            background: #f39c12;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px;
+            width: 80px;
+            height: 30px;
+            display: inline-block;
+        }
+        .wire {
+            stroke: #333;
+            stroke-width: 3;
+            fill: none;
+        }
+        .wire-red { stroke: #e74c3c; }
+        .wire-black { stroke: #2c3e50; }
+        .wire-blue { stroke: #3498db; }
+        .wire-green { stroke: #27ae60; }
+        .wire-yellow { stroke: #f1c40f; }
+        
+        .pin-label {
+            font-size: 12px;
+            font-weight: bold;
+            fill: #2c3e50;
+        }
+        
+        .connection-list {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .connection-list h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .connection-item {
+            margin: 8px 0;
+            padding: 5px;
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arduino Mors Alfabesi Bağlantı Şeması</h1>
+        
+        <div class="diagram">
+            <svg width="800" height="400" viewBox="0 0 800 400">
+                <!-- Arduino -->
+                <rect x="300" y="150" width="200" height="100" fill="#4a90e2" rx="10"/>
+                <text x="400" y="180" text-anchor="middle" fill="white" font-size="16" font-weight="bold">ARDUINO UNO</text>
+                <text x="400" y="200" text-anchor="middle" fill="white" font-size="12">USB Port</text>
+                
+                <!-- Arduino Pinleri -->
+                <rect x="280" y="170" width="15" height="8" fill="#333"/>
+                <text x="270" y="178" text-anchor="end" class="pin-label">5V</text>
+                
+                <rect x="280" y="185" width="15" height="8" fill="#333"/>
+                <text x="270" y="193" text-anchor="end" class="pin-label">GND</text>
+                
+                <rect x="280" y="200" width="15" height="8" fill="#333"/>
+                <text x="270" y="208" text-anchor="end" class="pin-label">A4</text>
+                
+                <rect x="280" y="215" width="15" height="8" fill="#333"/>
+                <text x="270" y="223" text-anchor="end" class="pin-label">A5</text>
+                
+                <rect x="505" y="170" width="15" height="8" fill="#333"/>
+                <text x="530" y="178" text-anchor="start" class="pin-label">7</text>
+                
+                <rect x="505" y="185" width="15" height="8" fill="#333"/>
+                <text x="530" y="193" text-anchor="start" class="pin-label">GND</text>
+                
+                <!-- LCD I2C -->
+                <rect x="50" y="80" width="150" height="80" fill="#2ecc71" rx="8"/>
+                <text x="125" y="110" text-anchor="middle" fill="white" font-size="14" font-weight="bold">LCD I2C</text>
+                <text x="125" y="125" text-anchor="middle" fill="white" font-size="12">16x2</text>
+                
+                <!-- LCD Pinleri -->
+                <rect x="45" y="100" width="8" height="8" fill="#333"/>
+                <text x="35" y="108" text-anchor="end" class="pin-label" font-size="10">VCC</text>
+                
+                <rect x="45" y="115" width="8" height="8" fill="#333"/>
+                <text x="35" y="123" text-anchor="end" class="pin-label" font-size="10">GND</text>
+                
+                <rect x="45" y="130" width="8" height="8" fill="#333"/>
+                <text x="35" y="138" text-anchor="end" class="pin-label" font-size="10">SDA</text>
+                
+                <rect x="45" y="145" width="8" height="8" fill="#333"/>
+                <text x="35" y="153" text-anchor="end" class="pin-label" font-size="10">SCL</text>
+                
+                <!-- Buton Devresi -->
+                <rect x="600" y="280" width="60" height="30" fill="#e74c3c" rx="15"/>
+                <text x="630" y="300" text-anchor="middle" fill="white" font-size="12" font-weight="bold">BUTON</text>
+                
+                <!-- Pull-up Direnci -->
+                <rect x="580" y="230" width="20" height="40" fill="#f39c12" rx="3"/>
+                <text x="590" y="255" text-anchor="middle" fill="white" font-size="10" transform="rotate(-90 590 255)">10kΩ</text>
+                
+                <!-- Bağlantı Kabloları -->
+                <!-- 5V to LCD VCC (Kırmızı) -->
+                <line x1="280" y1="174" x2="200" y2="174" class="wire wire-red"/>
+                <line x1="200" y1="174" x2="200" y2="104" class="wire wire-red"/>
+                <line x1="200" y1="104" x2="53" y2="104" class="wire wire-red"/>
+                
+                <!-- GND to LCD GND (Siyah) -->
+                <line x1="280" y1="189" x2="220" y2="189" class="wire wire-black"/>
+                <line x1="220" y1="189" x2="220" y2="119" class="wire wire-black"/>
+                <line x1="220" y1="119" x2="53" y2="119" class="wire wire-black"/>
+                
+                <!-- A4 to LCD SDA (Mavi) -->
+                <line x1="280" y1="204" x2="240" y2="204" class="wire wire-blue"/>
+                <line x1="240" y1="204" x2="240" y2="134" class="wire wire-blue"/>
+                <line x1="240" y1="134" x2="53" y2="134" class="wire wire-blue"/>
+                
+                <!-- A5 to LCD SCL (Yeşil) -->
+                <line x1="280" y1="219" x2="260" y2="219" class="wire wire-green"/>
+                <line x1="260" y1="219" x2="260" y2="149" class="wire wire-green"/>
+                <line x1="260" y1="149" x2="53" y2="149" class="wire wire-green"/>
+                
+                <!-- Buton bağlantıları -->
+                <!-- Pin 7 to Buton (Sarı) -->
+                <line x1="520" y1="174" x2="590" y2="174" class="wire wire-yellow"/>
+                <line x1="590" y1="174" x2="590" y2="280" class="wire wire-yellow"/>
+                
+                <!-- 5V to Pull-up direnci -->
+                <line x1="280" y1="174" x2="590" y2="174" class="wire wire-red" stroke-dasharray="5,5"/>
+                <line x1="590" y1="174" x2="590" y2="230" class="wire wire-red"/>
+                
+                <!-- Pull-up direnci to buton -->
+                <line x1="590" y1="270" x2="590" y2="280" class="wire"/>
+                
+                <!-- Buton to GND -->
+                <line x1="630" y1="310" x2="630" y2="350" class="wire wire-black"/>
+                <line x1="630" y1="350" x2="520" y2="350" class="wire wire-black"/>
+                <line x1="520" y1="350" x2="520" y2="189" class="wire wire-black"/>
+                
+                <!-- Etiketler -->
+                <text x="150" y="75" text-anchor="middle" font-size="12" fill="#2c3e50">I2C LCD Ekran</text>
+                <text x="630" y="330" text-anchor="middle" font-size="12" fill="#2c3e50">Push Button</text>
+                <text x="570" y="250" text-anchor="middle" font-size="10" fill="#2c3e50">Pull-up</text>
+                <text x="570" y="262" text-anchor="middle" font-size="10" fill="#2c3e50">10kΩ</text>
+                
+            </svg>
+        </div>
+        
+        <div class="connection-list">
+            <h3>🔌 Bağlantı Listesi</h3>
+            
+            <h4>LCD I2C Modülü → Arduino:</h4>
+            <div class="connection-item"><strong>VCC</strong> → <strong>5V</strong> (Kırmızı kablo)</div>
+            <div class="connection-item"><strong>GND</strong> → <strong>GND</strong> (Siyah kablo)</div>
+            <div class="connection-item"><strong>SDA</strong> → <strong>A4</strong> (Mavi kablo)</div>
+            <div class="connection-item"><strong>SCL</strong> → <strong>A5</strong> (Yeşil kablo)</div>
+            
+            <h4>Buton Devresi → Arduino:</h4>
+            <div class="connection-item"><strong>Buton bir bacağı</strong> → <strong>Pin 7</strong> (Sarı kablo)</div>
+            <div class="connection-item"><strong>Buton diğer bacağı</strong> → <strong>GND</strong> (Siyah kablo)</div>
+            <div class="connection-item"><strong>10kΩ direnç</strong> → <strong>Pin 7</strong> ile <strong>5V</strong> arası (Pull-up)</div>
+        </div>
+        
+        <div class="warning">
+            <h3>⚠️ Önemli Notlar</h3>
+            <ul>
+                <li><strong>Pull-up direnci zorunlu!</strong> Buton Pin 7 ve 5V arasına 10kΩ direnç takın</li>
+                <li><strong>Arduino'yu USB'den besleyin</strong> - ayrı güç kaynağına gerek yok</li>
+                <li><strong>LCD adresi:</strong> Genellikle 0x27, çalışmıyorsa 0x3F deneyin</li>
+                <li><strong>Kablo renkleri</strong> sadece referans içindir, rengine göre bağlantı yapmayın</li>
+                <li><strong>Breadboard kullanın</strong> - GND ve 5V ray'ları kullanmak kolay olur</li>
+            </ul>
+        </div>
+        
+        <div class="connection-list">
+            <h3>🛠️ Breadboard Bağlantı Önerisi</h3>
+            <div class="connection-item">1. Arduino'yu breadboard'un yanına yerleştirin</div>
+            <div class="connection-item">2. Breadboard'un kırmızı ray'ına Arduino 5V'yi bağlayın</div>
+            <div class="connection-item">3. Breadboard'un siyah ray'ına Arduino GND'yi bağlayın</div>
+            <div class="connection-item">4. LCD'yi kırmızı ve siyah ray'lara bağlayın (VCC ve GND için)</div>
+            <div class="connection-item">5. Butonu breadboard'a takın, pull-up direncini unutmayın!</div>
+        </div>
+    </div>
+</body>
+</html>
