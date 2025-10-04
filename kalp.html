@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kalp (Simetrik + Atan)</title>
+<style>
+  :root { --size: 140px; } /* Boyutu buradan değiştir */
+
+  body{
+    margin:0;
+    height:100vh;
+    display:grid;
+    place-items:center;
+    background:#111;
+  }
+
+  .heart{
+    position:relative;
+    width: var(--size);
+    height: var(--size);          /* KARE OLSUN */
+    background: #e53935;
+    transform: rotate(-45deg) scale(1);
+    transform-origin: center;
+    animation: beat 0.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  /* Üstteki iki daire */
+  .heart::before,
+  .heart::after{
+    content:"";
+    position:absolute;
+    width: var(--size);
+    height: var(--size);
+    background: #e53935;
+    border-radius: 50%;
+  }
+
+  .heart::before{               /* Sol tepe */
+    top: calc(-0.5 * var(--size));
+    left: 0;
+  }
+
+  .heart::after{                /* Sağ tepe */
+    top: 0;
+    left: calc(0.5 * var(--size));
+  }
+
+  /* Kalp atışı */
+  @keyframes beat{
+    0%   { transform: rotate(-45deg) scale(1);   }
+    25%  { transform: rotate(-45deg) scale(1.08);}
+    50%  { transform: rotate(-45deg) scale(1);   }
+    75%  { transform: rotate(-45deg) scale(1.08);}
+    100% { transform: rotate(-45deg) scale(1);   }
+  }
+
+  /* Hareket hassasiyeti olanlar için animasyonu kapat */
+  @media (prefers-reduced-motion: reduce){
+    .heart{ animation: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="heart"></div>
+</body>
+</html>
